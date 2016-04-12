@@ -36,7 +36,7 @@
 \usepackage{amsfonts, amsmath, amsthm, amssymb} % For math fonts, symbols and environments
 \usepackage{wrapfig} % Allows wrapping text around tables and figures
 \usepackage[utf8]{inputenc} % Pour utiliser les caractères accentués
-
+\usepackage{tikz}
 \begin{document}
 
 %----------------------------------------------------------------------------------------
@@ -86,7 +86,7 @@
 
 %----------------------------------------------------------------------------------------
 
-\begin{multicols*}{3} % This is how many columns your poster will be broken into, a poster with many figures may benefit from less columns whereas a text-heavy poster benefits from more
+\begin{multicols}{3} % This is how many columns your poster will be broken into, a poster with many figures may benefit from less columns whereas a text-heavy poster benefits from more
 
 %----------------------------------------------------------------------------------------
 %	ABSTRACT
@@ -177,8 +177,52 @@ use of a 1D column lake model is appropriate.
 %----------------------------------------------------------------------------------------
 
 \section*{(C) Methods and experiment configurations}
-
 \subsection*{(C.1) Methods}
+The impacts of lake-atmosphere interactions on
+projected changes and the impacts of direct lake-river interactions on projected
+changes in streamflow are assessed using the configurations with and without
+lakes, described below.
+
+%
+\begin{minipage}[t]{\linewidth}
+\center
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Simulation} & \textbf{Period} & \textbf{Description}\\
+\midrule
+ERAI-CRCM5-L     & 1979--2010 & Reanalysis-driven, includes lake-atm. and lake-river interactions\\
+CanESM2-CRCM5-NL & 1950--2100 & CanESM2-driven, lakes are replaced with bare ground \\
+CanESM2-CRCM5-L  & 1950--2100 & CanESM2-driven, includes lake-atm. and lake-river interactions \\
+\bottomrule
+\end{tabular}
+\captionof{table}{\color{Green} List of simulations used in the current study}
+\end{minipage}
+
+%
+\begin{minipage}[t]{\linewidth}
+\begin{tikzpicture}
+    % schematics
+    \node[label={\small NL (no lakes)}] (nl) at (0,0) {\includegraphics[scale=0.5]{crcm5-nl}};
+    \node[label={\small L (with lakes)}] (wl) at (0,-5) {\includegraphics[scale=0.5]{crcm5-l}};
+
+    \node (middle) at (6, -2.5) {
+
+
+    };
+
+    % lines
+    \draw[line width=5pt] (nl.east) -- (middle.west);
+    \draw[line width=5pt] (wl.east) -- (middle.west);
+
+    % explanation bullets
+    \node[text width=\linewidth, align=left] (b1) at (8, -1) {$\bullet$ By comparing projected changes to atmospheric fields $\longrightarrow$ Impact of lake-atm. interactions.};
+    \node[text width=\linewidth, align=left] (b2) at (8, -4) {$\bullet$ By comparing projected changes to streamflow $\longrightarrow$ Direct \& indirect impact of lakes on rivers.};
+
+\end{tikzpicture}
+\end{minipage}
+
+
 
 
 \subsection*{(C.2) Experiment setup}
@@ -195,12 +239,17 @@ use of a 1D column lake model is appropriate.
 \begin{itemize}
   \item Horizontal grid: 260$\times$260, \color{Red} dx=0.1$^\circ$ \color{DarkSlateGray};
   \item Time step: \color{Red} 5 min \color{DarkSlateGray};
-  \item Simulation periods:\\ \textbf{1979-2010} (current climate, validation), \textbf{1950-2100} (climate change);
-  \item Analysis periods:\\ 1980-2010 (current) and 2070-2100 (future);
+  \item Simulation periods:\\ \textbf{1979--2010} (current climate, validation), \textbf{1950--2100} (climate change);
+  \item Analysis periods:\\ \textbf{1980--2010} (current), \textbf{2070--2100} (future);
   \item Surface scheme: CLASS3.5;
   \item Lake model: Hostetler;
   \item River model: WATROUTE-modified;
-  \item Lateral boundary conditions: ERA-Interim, 1.5$^\circ$.
+  \item Lateral boundary conditions:
+    \begin{itemize}
+        \item ERA-Interim, 1.5$^\circ$
+        \item CanESM2 outputs
+    \end{itemize}
+
 \end{itemize}
 \end{minipage}
 
@@ -211,39 +260,26 @@ use of a 1D column lake model is appropriate.
 \section*{(D) Results}
 
 \subsection*{(D.1) Validation}
-\begin{minipage}[b]{0.45\linewidth}
+\begin{minipage}[t]{0.45\linewidth}
 \begin{center}
-  \includegraphics[width=\linewidth]{streamflow_validation}
-  \captionof{figure}{\color{Green} Improvements to the simulated streamflow due to the inclusion of the lake-river interactions. Observed streamflow is taken from CEHQ.}
+  \includegraphics[width=\linewidth]{bfe_atm}
+  \captionof{figure}{\color{Green} Boundary forcing errors, i.e. differences between CanESM2-CRCM5-L and ERAI- CRCM5-L simulations for the 1980–2010 period, for 2-m air temperature [$^\circ$C] (first row), total precipitation [mm/day] (second row), SWE [mm] (third row) and streamflows [m$^3$/s] (fourth row).}
 \end{center}
 \end{minipage}\hfill
 %
-\begin{minipage}[b]{0.45\linewidth}
+\begin{minipage}[t]{0.45\linewidth}
 \begin{center}
-  \includegraphics[width=\linewidth]{streamflow_validation}
-  \captionof{figure}{\color{Green} Improvements to the simulated streamflow due to the inclusion of the lake-river interactions. Observed streamflow is taken from CEHQ.}
+  \includegraphics[width=\linewidth]{streamflow_validation_6}
+  \captionof{figure}{\color{Green} (a) Locations and identification numbers (IDs) of the selected gauging stations with their upstream areas (determined from the flow directions field) shown shaded. (b) Comparison of observed (black) and modelled (blue and red correspond to ERAI-CRCM5-L and CanESM2-CRCM5-L simulations, respectively) daily climatological streamflow [m3/s] at selected stations. }
 \end{center}
 \end{minipage}
+%
 
 \subsection*{(D.2) Impacts of lake-atmosphere and lake-river interactions on projected climate changes}
 
 
 
 
-%
-\begin{wraptable}{l}{12cm} % Left or right alignment is specified in the first bracket, the width of the table is in the second
-\begin{tabular}{l l l}
-\toprule
-\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
-\midrule
-Treatment 1 & 0.0003262 & 0.562 \\
-Treatment 2 & 0.0015681 & 0.910 \\
-Treatment 3 & 0.0009271 & 0.296 \\
-\bottomrule
-\end{tabular}
-\captionof{table}{\color{Green} Table caption}
-\end{wraptable}
-%
 Phasellus imperdiet, tortor vitae congue bibendum, felis enim sagittis lorem, et volutpat ante orci sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec tortor consectetur non commodo nisi sollicitudin. Proin sollicitudin. Pellentesque eget orci eros. Fusce ultricies, tellus et pellentesque fringilla, ante massa luctus libero, quis tristique purus urna nec nibh.
 
 Nulla ut porttitor enim. Suspendisse venenatis dui eget eros gravida tempor. Mauris feugiat elit et augue placerat ultrices. Morbi accumsan enim nec tortor consectetur non commodo. Pellentesque condimentum dui. Etiam sagittis purus non tellus tempor volutpat. Donec et dui non massa tristique adipiscing. Quisque vestibulum eros eu. Phasellus imperdiet, tortor vitae congue bibendum, felis enim sagittis lorem, et volutpat ante orci sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec tortor consectetur non commodo nisi sollicitudin.
@@ -292,13 +328,6 @@ Vivamus sed nibh ac metus tristique tristique a vitae ante. Sed lobortis mi ut a
 
 \color{DarkSlateGray} % Set the color back to DarkSlateGray for the rest of the content
 
-%----------------------------------------------------------------------------------------
-%	FORTHCOMING RESEARCH
-%----------------------------------------------------------------------------------------
-
-\section*{Forthcoming Research}
-
-Vivamus molestie, risus tempor vehicula mattis, libero arcu volutpat purus, sed blandit sem nibh eget turpis. Maecenas rutrum dui blandit lorem vulputate gravida. Praesent venenatis mi vel lorem tempor at varius diam sagittis. Nam eu leo id turpis interdum luctus a sed augue. Nam tellus.
 
  %----------------------------------------------------------------------------------------
 %	REFERENCES
@@ -313,9 +342,8 @@ Vivamus molestie, risus tempor vehicula mattis, libero arcu volutpat purus, sed 
 %----------------------------------------------------------------------------------------
 
 \section*{Acknowledgements}
-
 This research was carried out within the Canadian Network for Regional Climate and Weather Processes (CNRCWP) project funded by the Natural Sciences and Engineering Research Council (NSERC) of Canada.
 %----------------------------------------------------------------------------------------
 
-\end{multicols*}
+\end{multicols}
 \end{document}
