@@ -37,6 +37,8 @@
 \usepackage{wrapfig} % Allows wrapping text around tables and figures
 \usepackage[utf8]{inputenc} % Pour utiliser les caractères accentués
 \usepackage{tikz}
+\usetikzlibrary{shapes,snakes}
+\usetikzlibrary{positioning}
 \begin{document}
 
 %----------------------------------------------------------------------------------------
@@ -177,13 +179,13 @@ use of a 1D column lake model is appropriate.
 %----------------------------------------------------------------------------------------
 
 \section*{(C) Methods and experiment configurations}
-\subsection*{(C.1) Methods}
+\subsection*{C.1 Methods}
+%
 The impacts of lake-atmosphere interactions on
 projected changes and the impacts of direct lake-river interactions on projected
 changes in streamflow are assessed using the configurations with and without
-lakes, described below.
+lakes, described below.\\[0.5cm]
 
-%
 \begin{minipage}[t]{\linewidth}
 \center
 \small
@@ -201,46 +203,42 @@ CanESM2-CRCM5-L  & 1950--2100 & CanESM2-driven, includes lake-atm. and lake-rive
 
 %
 \begin{minipage}[t]{\linewidth}
+\flushleft
 \begin{tikzpicture}
     % schematics
     \node[label={\small NL (no lakes)}] (nl) at (0,0) {\includegraphics[scale=0.5]{crcm5-nl}};
     \node[label={\small L (with lakes)}] (wl) at (0,-5) {\includegraphics[scale=0.5]{crcm5-l}};
 
-    \node (middle) at (6, -2.5) {
-
-
-    };
+    \node (middle) at (6, -2.5) {};
 
     % lines
     \draw[line width=5pt] (nl.east) -- (middle.west);
     \draw[line width=5pt] (wl.east) -- (middle.west);
 
     % explanation bullets
-    \node[text width=\linewidth, align=left] (b1) at (8, -1) {$\bullet$ By comparing projected changes to atmospheric fields $\longrightarrow$ Impact of lake-atm. interactions.};
-    \node[text width=\linewidth, align=left] (b2) at (8, -4) {$\bullet$ By comparing projected changes to streamflow $\longrightarrow$ Direct \& indirect impact of lakes on rivers.};
-
+    \node[text width=0.7\linewidth, draw] (b1) at (18, -1) {$\bullet$ By comparing projected changes to atmospheric fields \\ $\longrightarrow$ Impact of lake-atm. interactions.};
+    \node[text width=0.7\linewidth, draw] (b2) at (18, -4) {$\bullet$ By comparing projected changes to streamflow \\ $\longrightarrow$ Direct \& indirect impact of lakes on changes to streamflow.};
 \end{tikzpicture}
 \end{minipage}
 
 
 
 
-\subsection*{(C.2) Experiment setup}
-  \begin{minipage}[b]{0.5\linewidth}
-    \center
-    \includegraphics[width=\linewidth]{qc_basin_outlets_points}
-    \captionof{figure}{\color{Green} Left panel: domain with basins of interest, the grey circles show basin outlets determined from the flow
-    direction field, used for streamflow simulations; middle panel: zonally averaged lake fractions. Right panel: topography [m], the cells with lake fractions greater or equal to 0.6 are indicated with blue colour,
-    the gray cells contain 20$\times$20 grid cells.}
-  \end{minipage} \hfill
+\subsection*{C.2 Experiment setup}
+\begin{minipage}[c]{0.5\linewidth}
+  \center
+  \includegraphics[width=\linewidth]{qc_basin_outlets_points}
+  \captionof{figure}{\color{Green} Left panel: domain with basins of interest, the grey circles show basin outlets determined from the flow
+  direction field, used for streamflow simulations; middle panel: zonally averaged lake fractions. Right panel: topography [m], the cells with lake fractions greater or equal to 0.6 are indicated with blue colour,
+  the gray cells contain 20$\times$20 grid cells.}
+\end{minipage} \hfill
 %
-\begin{minipage}[b]{0.45\linewidth}
+\begin{minipage}[c]{0.45\linewidth}
 \flushleft
 \begin{itemize}
   \item Horizontal grid: 260$\times$260, \color{Red} dx=0.1$^\circ$ \color{DarkSlateGray};
   \item Time step: \color{Red} 5 min \color{DarkSlateGray};
-  \item Simulation periods:\\ \textbf{1979--2010} (current climate, validation), \textbf{1950--2100} (climate change);
-  \item Analysis periods:\\ \textbf{1980--2010} (current), \textbf{2070--2100} (future);
+  \item Analysis periods:\\ \textbf{1980--2010} and \textbf{2070--2100};
   \item Surface scheme: CLASS3.5;
   \item Lake model: Hostetler;
   \item River model: WATROUTE-modified;
@@ -259,59 +257,66 @@ CanESM2-CRCM5-L  & 1950--2100 & CanESM2-driven, includes lake-atm. and lake-rive
 
 \section*{(D) Results}
 
-\subsection*{(D.1) Validation}
-\begin{minipage}[t]{0.45\linewidth}
+\subsection*{D.1 Validation}
+\begin{minipage}[b]{0.35\linewidth}
 \begin{center}
-  \includegraphics[width=\linewidth]{bfe_atm}
-  \captionof{figure}{\color{Green} Boundary forcing errors, i.e. differences between CanESM2-CRCM5-L and ERAI- CRCM5-L simulations for the 1980–2010 period, for 2-m air temperature [$^\circ$C] (first row), total precipitation [mm/day] (second row), SWE [mm] (third row) and streamflows [m$^3$/s] (fourth row).}
+  \includegraphics[width=0.7\linewidth]{streamflow_validation_6_positions}
+  \captionof{figure}{\color{Green} Locations and identification numbers (IDs) of the selected gauging stations
+with their upstream areas (determined from the flow directions field) shown
+shaded.}
 \end{center}
 \end{minipage}\hfill
 %
-\begin{minipage}[t]{0.45\linewidth}
+\begin{minipage}[b]{0.60\linewidth}
 \begin{center}
   \includegraphics[width=\linewidth]{streamflow_validation_6}
-  \captionof{figure}{\color{Green} (a) Locations and identification numbers (IDs) of the selected gauging stations with their upstream areas (determined from the flow directions field) shown shaded. (b) Comparison of observed (black) and modelled (blue and red correspond to ERAI-CRCM5-L and CanESM2-CRCM5-L simulations, respectively) daily climatological streamflow [m3/s] at selected stations. }
+  \captionof{figure}{\color{Green} Comparison of observed (black) and modelled (blue and red correspond
+to ERAI-CRCM5-L and CanESM2-CRCM5-L simulations, respectively) daily
+climatological streamflow [m$^3$/s] at selected stations. }
 \end{center}
 \end{minipage}
 %
+\begin{itemize}
+  \item Simulated streamflow mostly compares reasonably with the observations
+  \item The lower performance for the southern stations is due to the uncertainties in soil parameters, which leads to higher infiltration during melting period and streamflow overestimation afterwards.
+\end{itemize}
 
-\subsection*{(D.2) Impacts of lake-atmosphere and lake-river interactions on projected climate changes}
+
+\subsection*{D.2 Impacts of lake-atmosphere and lake-river interactions on projected climate changes}
+\begin{minipage}[t]{\linewidth}
+\center
+\begin{tikzpicture}
+    % schematics
+    \node[label={\small CanESM2-CRCM5-L (with lakes)}] (lcc) at (0,0) {\includegraphics[scale=0.9]{impact_on_cc}};
+    \node[label={\small CanESM2-CRCM5-NL (no lakes)}] (nlcc) at (20,0) {\includegraphics[scale=0.9]{impact_on_cc}};
+    \node[diamond, text width=0.05\linewidth, align=center, draw] (operation) at (10,-10) {\Huge -};
+
+    \node[label={\small CanESM2-CRCM5-L minus CanESM2-CRCM5-NL}] (lcc_vs_nlcc) at (20,-20) {\includegraphics[scale=0.9]{impact_on_cc}};
+
+    % lines
+    \draw[-latex, line width=5pt] (operation.south) to[out=-90,in=180] (lcc_vs_nlcc.west);
+    \draw[-latex, line width=5pt] (lcc.south) to[out=-90,in=180] (operation.west);
+    \draw[-latex, line width=5pt] (nlcc.south) to[out=-90,in=0] (operation.east);
+
+    %Points
+    \node[draw, text width=0.5\linewidth] (point1) at (0, -13) {$\bullet$ Lakes attenuate projected changes to the temperature during all seasons};
+    \node[below= 0.5cm of point1, draw, text width=0.5\linewidth] (point2) {$\bullet$ Attenuated precipitation increases in winter and spring are due to attenuated increases in temperature by lakes};
+    \node[below=0.5cm of point2, draw, text width=0.5\linewidth] (point3) {$\bullet$ Decreases in SWE are amplified by lakes in the northern part in winter and spring due to attenuated increases in precipitation};
+    \node[below=0.5cm of point3, draw, text width=0.5\linewidth] (point4) {$\bullet$ Lakes mostly dampen amplitudes of projected increases and decreases to streamflow};
+
+    \node[below=1.5cm of point4, draw, text width=0.5\linewidth, align=left] (winter){\small \textbf{Winter streamflow.} Dipole pattern: \color{Blue}negative\color{Black} sign due to meltwater stored in lakes, \color{Red}positive\color{Black} sign since lakes supply water in frozen conditions};
+    \node[below right=0.5cm of winter, draw, text width=0.5\linewidth, align=left] (summer){\small \textbf{Summer streamflow.} Decreases in streamflow are dampened by additional water from lakes};
 
 
+    %lines streamflow
+    \draw[-latex, line width=5pt] (winter.east) to[out=0,in=215] (lcc_vs_nlcc.south west);
+    \draw[-latex, line width=5pt] (summer.north) to[out=70,in=240] (lcc_vs_nlcc.south);
 
 
-Phasellus imperdiet, tortor vitae congue bibendum, felis enim sagittis lorem, et volutpat ante orci sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec tortor consectetur non commodo nisi sollicitudin. Proin sollicitudin. Pellentesque eget orci eros. Fusce ultricies, tellus et pellentesque fringilla, ante massa luctus libero, quis tristique purus urna nec nibh.
+\end{tikzpicture}
+\end{minipage}
 
-Nulla ut porttitor enim. Suspendisse venenatis dui eget eros gravida tempor. Mauris feugiat elit et augue placerat ultrices. Morbi accumsan enim nec tortor consectetur non commodo. Pellentesque condimentum dui. Etiam sagittis purus non tellus tempor volutpat. Donec et dui non massa tristique adipiscing. Quisque vestibulum eros eu. Phasellus imperdiet, tortor vitae congue bibendum, felis enim sagittis lorem, et volutpat ante orci sagittis mi. Morbi rutrum laoreet semper. Morbi accumsan enim nec tortor consectetur non commodo nisi sollicitudin.
 
-\begin{center}\vspace{1cm}
-\includegraphics[width=0.8\linewidth]{placeholder}
-\captionof{figure}{\color{Green} Figure caption}
-\end{center}\vspace{1cm}
-
-In hac habitasse platea dictumst. Etiam placerat, risus ac.
-
-Adipiscing lectus in magna blandit:
-
-\begin{center}\vspace{1cm}
-\begin{tabular}{l l l l}
-\toprule
-\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2} \\
-\midrule
-Treatment 1 & 0.0003262 & 0.562 \\
-Treatment 2 & 0.0015681 & 0.910 \\
-Treatment 3 & 0.0009271 & 0.296 \\
-\bottomrule
-\end{tabular}
-\captionof{table}{\color{Green} Table caption}
-\end{center}\vspace{1cm}
-
-Vivamus sed nibh ac metus tristique tristique a vitae ante. Sed lobortis mi ut arcu fringilla et adipiscing ligula rutrum. Aenean turpis velit, placerat eget tincidunt nec, ornare in nisl. In placerat.
-
-\begin{center}\vspace{1cm}
-\includegraphics[width=0.8\linewidth]{placeholder}
-\captionof{figure}{\color{Green} Figure caption}
-\end{center}\vspace{1cm}
 
 %----------------------------------------------------------------------------------------
 %	CONCLUSIONS
@@ -334,14 +339,15 @@ Vivamus sed nibh ac metus tristique tristique a vitae ante. Sed lobortis mi ut a
 %----------------------------------------------------------------------------------------
 
 \nocite{*} % Print all references regardless of whether they were cited in the poster or not
+\small
 \bibliographystyle{plain} % Plain referencing style
 \bibliography{sample} % Use the example bibliography file sample.bib
 
 %----------------------------------------------------------------------------------------
 %	ACKNOWLEDGEMENTS
 %----------------------------------------------------------------------------------------
-
 \section*{Acknowledgements}
+\small
 This research was carried out within the Canadian Network for Regional Climate and Weather Processes (CNRCWP) project funded by the Natural Sciences and Engineering Research Council (NSERC) of Canada.
 %----------------------------------------------------------------------------------------
 
