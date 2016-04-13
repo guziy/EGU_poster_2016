@@ -289,9 +289,9 @@ climatological streamflow [m$^3$/s] at selected stations. }
     % schematics
     \node[label={\small CanESM2-CRCM5-L (with lakes)}] (lcc) at (0,0) {\includegraphics[scale=0.9]{impact_on_cc}};
     \node[label={\small CanESM2-CRCM5-NL (no lakes)}] (nlcc) at (20,0) {\includegraphics[scale=0.9]{impact_on_cc}};
-    \node[diamond, text width=0.05\linewidth, align=center, draw] (operation) at (10,-10) {\Huge -};
+    \node[diamond, text width=0.05\linewidth, align=center, draw] (operation) at (10,-9) {\Huge -};
 
-    \node[label={\small CanESM2-CRCM5-L minus CanESM2-CRCM5-NL}] (lcc_vs_nlcc) at (20,-20) {\includegraphics[scale=0.9]{impact_on_cc}};
+    \node[label={\small CanESM2-CRCM5-L minus CanESM2-CRCM5-NL}] (lcc_vs_nlcc) at (20,-19) {\includegraphics[scale=0.9]{impact_on_cc}};
 
     % lines
     \draw[-latex, line width=5pt] (operation.south) to[out=-90,in=180] (lcc_vs_nlcc.west);
@@ -304,13 +304,13 @@ climatological streamflow [m$^3$/s] at selected stations. }
     \node[below=0.5cm of point2, draw, text width=0.5\linewidth] (point3) {$\bullet$ Decreases in SWE are amplified by lakes in the northern part in winter and spring due to attenuated increases in precipitation};
     \node[below=0.5cm of point3, draw, text width=0.5\linewidth] (point4) {$\bullet$ Lakes mostly dampen amplitudes of projected increases and decreases to streamflow};
 
-    \node[below=1.5cm of point4, draw, text width=0.5\linewidth, align=left] (winter){\small \textbf{Winter streamflow.} Dipole pattern: \color{Blue}negative\color{Black} sign due to meltwater stored in lakes, \color{Red}positive\color{Black} sign since lakes supply water in frozen conditions};
-    \node[below right=0.5cm of winter, draw, text width=0.5\linewidth, align=left] (summer){\small \textbf{Summer streamflow.} Decreases in streamflow are dampened by additional water from lakes};
+    \node[below=1.0cm of point4, draw, text width=0.5\linewidth, align=left] (winter){\small \textbf{Winter streamflow.} Dipole pattern: \color{Blue}negative \color{Black} sign due to meltwater stored in lakes, \color{Red}positive \color{Black} sign since lakes supply water in frozen conditions};
+    \node[below=1.0cm of lcc_vs_nlcc, draw, text width=0.5\linewidth, align=left] (summer){\small \textbf{Summer streamflow.} Decreases in streamflow are dampened by additional water from lakes};
 
 
     %lines streamflow
-    \draw[-latex, line width=5pt] (winter.east) to[out=0,in=215] (lcc_vs_nlcc.south west);
-    \draw[-latex, line width=5pt] (summer.north) to[out=70,in=240] (lcc_vs_nlcc.south);
+    \draw[-latex, line width=5pt] (winter.east) to[out=0,in=215] ([xshift=2em,yshift=2em]lcc_vs_nlcc.south west);
+    \draw[-latex, line width=5pt] (summer.north) to[out=90,in=270] ([xshift=0.5em,yshift=1.5em]lcc_vs_nlcc.south);
 
 
 \end{tikzpicture}
