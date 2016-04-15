@@ -39,8 +39,9 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes,snakes}
 \usetikzlibrary{positioning}
-
-\usepackage{tcolorbox}
+\usepackage[export]{adjustbox}
+\usepackage[skins,listings,breakable,listingsutf8,theorems,hooks,fitting]{tcolorbox}
+\tcbuselibrary{raster}
 \begin{document}
 
 %----------------------------------------------------------------------------------------
@@ -90,7 +91,7 @@
 
 %----------------------------------------------------------------------------------------
 
-\begin{multicols*}{3} % This is how many columns your poster will be broken into, a poster with many figures may benefit from less columns whereas a text-heavy poster benefits from more
+\begin{multicols}{3} % This is how many columns your poster will be broken into, a poster with many figures may benefit from less columns whereas a text-heavy poster benefits from more
 
 %----------------------------------------------------------------------------------------
 %	INTRODUCTION
@@ -99,42 +100,17 @@
 \color{SaddleBrown} % SaddleBrown color for the introduction
 
 \section*{(A) Introduction}
-Inland water bodies, such as lakes and rivers, are essential for human
-livelihood (i.e. drinking water, agriculture, hydroelectricity, transportation),
-and this has led to many activities around lakes and rivers, which in turn
-resulted in the development of expensive and important infrastructure in the
-proximity of such water bodies. The safety and proper functioning of these
-infrastructures in the context of a changing climate is a major concern. For
-this reason, it is important to assess projected changes to the hydrological
-cycle and related uncertainties.
-
-Though many climate models, particularly RCMs, include lakes, only few studies
-have attempted to realistically simulate the water balance of lakes, considering
-inflows and outflows of lakes, and the impact of lakes on streamflows. Huziy and
-Sushama (2015) recently implemented a river/lake routing scheme, interflow
-process, i.e. the lateral flow of water in the top soil layers along topographic
-slopes, and interactions between lakes and rivers in terms of water balance in
-the fifth generation Canadian Regional Climate Model (CRCM5). By including lake
-routing, they noticed significant improvements to the simulated spring peak and
-winter low flows, which were too high and too low, respectively, without the
-lake-river interaction. The impacts of interflow on simulated streamflow and on
-the regional climate were modest according to their study. These new
-implementations in CRCM5 by Huziy and Sushama (2015) resulted in a more
-comprehensive tool for regional climate change studies that can be used to
-better understand interactions between atmosphere, lakes and rivers in the
-context of a changing climate.
-
-This study therefore focuses on the projected changes to the regional climate
-and hydrology for northeastern Canada using CRCM5, and estimates the
-impacts of lake-river, lake-atmosphere interactions and of interflow on the
-projected changes to selected hydrologic/near-surface climate variables under
-the Representative Concentration Pathway 8.5 (RCP85). For this scenario, the
-concentration of greenhouse gases in the atmosphere continues to rise during the
-21st century, causing an increase in the radiative forcing of 8.5 ${\rm W/m^2}$ by 2100
-with respect to the preindustrial period. The study domain covers 21
-watersheds that are important for various economic activities (notably
-hydropower generation) and contain a large number of subgrid lakes for which the
-use of a 1D column lake model is appropriate.
+Lakes influence the regional climate and hydrology in a number of ways and
+therefore they should be represented in climate models in a realistic manner.
+Lack of representation of lakes in models can lead to errors in simulated energy
+and water fluxes, for lake-rich regions. This study focuses on the assessment of
+the impact of climate change on lakes and hydrology as well as on the influence
+of lakes on projected changes to regional climate and surface hydrology,
+particularly streamflows, for Northeast Canada. To this end, transient climate
+change simulations spanning the 1950--2100 period are performed, with and without
+lakes, with the fifth generation of the Canadian Regional Climate Model (CRCM5),
+driven by the Canadian Earth System Model (CanESM2) at the lateral boundaries
+for Representative Concentration Pathway 8.5.
 
 %----------------------------------------------------------------------------------------
 %	OBJECTIVES
@@ -200,24 +176,20 @@ CanESM2-CRCM5-L  & 1950--2100 & CanESM2-driven, includes lake-atm. and lake-rive
 \end{minipage}
 
 
-
-
 \subsection*{C.2 Experiment setup}
-\begin{minipage}[c]{0.55\linewidth}
-  \center
-  \includegraphics[width=\linewidth]{qc_basin_outlets_points}
-  \captionof{figure}{\color{Green} Left panel: domain with basins of interest, the grey circles show basin outlets determined from the flow
-  direction field, used for streamflow simulations; middle panel: zonally averaged lake fractions. Right panel: topography [m], the cells with lake fractions greater or equal to 0.6 are indicated with blue colour,
-  the gray cells contain 20$\times$20 grid cells.}
-\end{minipage} \hfill
-%
-\begin{minipage}[c]{0.35\linewidth}
-\flushleft
+
+\begin{tcolorbox}[colback=white,colframe=green!40!black]
+\begin{minipage}{0.48\linewidth}
 \begin{itemize}
   \item Horizontal grid: 260$\times$260, \color{Red} dx=0.1$^\circ$ \color{DarkSlateGray};
   \item Time step: \color{Red} 5 min \color{DarkSlateGray};
-  \item Analysis periods:\\ \textbf{1980--2010} and \textbf{2070--2100};
+  \item Analysis periods: \\ \textbf{1980--2010} and \textbf{2070--2100};
   \item Surface scheme: CLASS3.5;
+\end{itemize}
+\end{minipage} \hfill
+%
+\begin{minipage}{0.48\linewidth}
+\begin{itemize}
   \item Lake model: Hostetler;
   \item River model: WATROUTE-modified;
   \item Lateral boundary conditions:
@@ -226,6 +198,15 @@ CanESM2-CRCM5-L  & 1950--2100 & CanESM2-driven, includes lake-atm. and lake-rive
         \item CanESM2 outputs
     \end{itemize}
 \end{itemize}
+\end{minipage}
+\end{tcolorbox}
+
+\begin{minipage}[c]{\linewidth}
+  \center
+  \includegraphics[width=\linewidth]{qc_basin_outlets_points}
+  \captionof{figure}{\color{Green} Left panel: domain with basins of interest, the grey circles show basin outlets determined from the flow
+  direction field, used for streamflow simulations; middle panel: zonally averaged lake fractions. Right panel: topography [m], the cells with lake fractions greater or equal to 0.6 are indicated with blue colour,
+  the gray cells contain 20$\times$20 grid cells.}
 \end{minipage}
 
 %----------------------------------------------------------------------------------------
@@ -237,7 +218,7 @@ CanESM2-CRCM5-L  & 1950--2100 & CanESM2-driven, includes lake-atm. and lake-rive
 \subsection*{D.1 Validation}
 \begin{minipage}[c]{0.45\linewidth}
 \begin{center}
-  \includegraphics[width=0.55\linewidth]{streamflow_validation_6_positions}
+  \includegraphics[width=0.6\linewidth]{streamflow_validation_6_positions}
   \captionof{figure}{\color{Green} Locations and identification numbers (IDs) of the selected gauging stations
 with their upstream areas (determined from the flow directions field) shown
 shaded.}
@@ -246,7 +227,7 @@ shaded.}
 %
 \begin{minipage}[c]{0.50\linewidth}
 \begin{center}
-  \includegraphics[width=0.75\linewidth]{streamflow_validation_6}
+  \includegraphics[width=0.95\linewidth]{streamflow_validation_6}
   \captionof{figure}{\color{Green} Comparison of observed (black) and modelled (blue and red correspond
 to ERAI-CRCM5-L and CanESM2-CRCM5-L simulations, respectively) daily
 climatological streamflow [m$^3$/s] at selected stations. }
@@ -260,25 +241,35 @@ climatological streamflow [m$^3$/s] at selected stations. }
 \end{itemize}
 \end{tcolorbox}
 
-\subsection*{D.2 Impacts of lake-atmosphere and lake-river on simulated mean streamflows: 1980--2010 period}
+\subsection*{D.2 Impacts of lake-atmosphere and lake-river on simulated mean streamflows: 1980--2010 period, m$^3$/s}
 
 \begin{minipage}{\linewidth}
   \center
   \begin{tikzpicture}
-      % schematics
-      \node[label={\small ERAI-CRCM5-L1 minus ERAI-CRCM5-NL}] (la) at (0,0) {\includegraphics[scale=0.5]{lake-atm-interactions}};
-      \node[label={\small ERAI-CRCM5-L minus ERAI-CRCM5-L1}] (lr) at (20,0) {\includegraphics[scale=0.5]{lake-river-interactions}};
+      % impacts of lake-atm. and lake-river interactions in current climate
+      \node[label={\small ERAI-CRCM5-L1 minus ERAI-CRCM5-NL}] (la) at (-9,0) {
+        \adjincludegraphics[trim={{0.125\width} {0.35\height} {0.105\width} {0.5\height}}, clip]{STFA_CRCM5-L1_CRCM5-NL}};
+      \node[label={\small ERAI-CRCM5-L minus ERAI-CRCM5-L1}] (lr) at (9,0) {
+        \adjincludegraphics[trim={{0.125\width} {0.35\height} {0.105\width} {0.5\height}}, clip]{STFA_CRCM5-L2_CRCM5-L1}};
   \end{tikzpicture}
+  \captionof{figure}{\color{Green} Impacts of lake-atm. interactions (left) and impacts of lake-river interactions (right). Not significant impacts are shown in gray.}
 \end{minipage}
 
-\begin{tcolorbox}[colback=white,colframe=green!40!black]
-\begin{itemize}
-  \item Impact of lake-atm. interactions is mostly positive, but modest.
-  \item Winter impacts are positive and significant for the bigger northern part of the domain due to additional water coming to the river network from lakes.
-  \item Mostly negative impacts are obtained in spring since part of water from snow melt is stored in lakes to be released later into the river network.
-\end{itemize}
-\end{tcolorbox}
 
+\begin{tcbitemize}[raster columns=2]
+%\tcbitem[colback=white,colframe=white,sidebyside align=top,sidebyside]
+  \tcbitem[colback=white,colframe=green!40!black, adjusted title={Lake-atm. interactions}]
+  \begin{itemize}
+    \item Impact of lake-atm. interactions is mostly positive, but modest.
+  \end{itemize}
+
+\tcbitem[colback=white,colframe=green!40!black,width=0.49\linewidth, adjusted title={Lake-river interactions}]
+  \begin{itemize}
+    \item Winter impacts are positive and significant for the bigger northern part of the domain due to additional water coming to the river network from lakes.
+    \item Mostly negative impacts are obtained in spring since part of water from snow melt is stored in lakes to be released later into the river network.
+  \end{itemize}
+
+\end{tcbitemize}
 
 
 \subsection*{D.3 Impacts of lake-atmosphere and lake-river interactions on projected climate changes}
@@ -350,5 +341,5 @@ climatological streamflow [m$^3$/s] at selected stations. }
 This research was carried out within the Canadian Network for Regional Climate and Weather Processes (CNRCWP) project funded by the Natural Sciences and Engineering Research Council (NSERC) of Canada.
 %----------------------------------------------------------------------------------------
 
-\end{multicols*}
+\end{multicols}
 \end{document}
