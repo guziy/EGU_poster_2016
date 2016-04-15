@@ -247,23 +247,23 @@ climatological streamflow [m$^3$/s] at selected stations. }
   \center
   \begin{tikzpicture}
       % impacts of lake-atm. and lake-river interactions in current climate
-      \node[label={\small ERAI-CRCM5-L1 minus ERAI-CRCM5-NL}] (la) at (-9,0) {
+      \node[label={\textbf{(a)} \small ERAI-CRCM5-L1 minus ERAI-CRCM5-NL}] (la) at (-9,0) {
         \adjincludegraphics[trim={{0.125\width} {0.35\height} {0.105\width} {0.5\height}}, clip]{STFA_CRCM5-L1_CRCM5-NL}};
-      \node[label={\small ERAI-CRCM5-L minus ERAI-CRCM5-L1}] (lr) at (9,0) {
+      \node[label={\textbf{(b)} \small ERAI-CRCM5-L minus ERAI-CRCM5-L1}] (lr) at (9,0) {
         \adjincludegraphics[trim={{0.125\width} {0.35\height} {0.105\width} {0.5\height}}, clip]{STFA_CRCM5-L2_CRCM5-L1}};
   \end{tikzpicture}
-  \captionof{figure}{\color{Green} Impacts of lake-atm. interactions (left) and impacts of lake-river interactions (right). Not significant impacts are shown in gray.}
+  \captionof{figure}{\label{fig_la_and_lr}\color{Green} Impacts of lake-atm. interactions (left) and impacts of lake-river interactions (right). Not significant impacts are shown in gray.}
 \end{minipage}
 
 
 \begin{tcbitemize}[raster columns=2, raster equal height]
 %\tcbitem[colback=white,colframe=white,sidebyside align=top,sidebyside]
-  \tcbitem[colback=white,colframe=green!40!black, adjusted title={Lake-atm. interactions}]
+  \tcbitem[colback=white,colframe=green!40!black, adjusted title={Lake-atm. interactions (Fig. \ref{fig_la_and_lr}a)}]
   \begin{itemize}
     \item Impact of lake-atm. interactions is mostly positive, but modest.
   \end{itemize}
 
-\tcbitem[colback=white,colframe=green!40!black, adjusted title={Lake-river interactions}]
+\tcbitem[colback=white,colframe=green!40!black, adjusted title={Lake-river interactions (Fig. \ref{fig_la_and_lr}b)}]
   \begin{itemize}
     \item Winter impacts are positive and significant for the bigger northern part of the domain due to additional water coming to the river network from lakes.
     \item Mostly negative impacts are obtained in spring since part of water from snow melt is stored in lakes to be released later into the river network.
